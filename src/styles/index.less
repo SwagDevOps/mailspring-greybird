@@ -23,6 +23,8 @@ body.platform-linux {
 
     .account-sidebar {
         background-color: @sidebar-background-color;
+        border-right: 1px solid @base-border-color;
+
         .item.selected {
             background: @sidebar-background-color;
         }
@@ -31,6 +33,24 @@ body.platform-linux {
     *[name=Toolbar] {
         .btn.btn-toolbar {
             background: @sidebar-background-color;
+        }
+    }
+
+    // List layout ---------------------------------------------------
+
+    .layout-mode-list {
+        *[data-id=Threads] .toolbar-ThreadList {
+            .thread-search-bar {
+                position: relative;
+                width: 100%;
+
+                .menu.search-container {
+                    width: 100%;
+                    max-width: 300px;
+                    position: absolute;
+                    right: 0;
+                }
+            }
         }
     }
 }
