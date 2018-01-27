@@ -20,4 +20,17 @@ body.platform-linux {
             }
         }
     }
+
+    .account-sidebar {
+        background-color: @sidebar-background-color;
+        .item.selected {
+            background: @sidebar-background-color;
+        }
+    }
+
+    *[name=Toolbar] {
+        .btn.btn-toolbar {
+            background: @sidebar-background-color;
+        }
+    }
 }
