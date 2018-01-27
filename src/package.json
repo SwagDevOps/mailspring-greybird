@@ -1,0 +1,13 @@
+{
+    "name": "greybird",
+    "title": "Greybird",
+    "displayName": "Greybird",
+    "theme": "greybird",
+    "version": "0.0.1",
+    "description": "Greybird integration",
+    "license": "GPL-3.0",
+    "engines": {
+        "mailspring": "*"
+    },
+    "private": true
+}

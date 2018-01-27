@@ -1,0 +1,23 @@
+@import "variables";
+
+body.platform-linux {
+    &, &.is-blurred {
+        .sheet-toolbar-container {
+            background-image: none;
+            box-shadow: none;
+            background: @titlebar-color;
+        }
+
+        .sheet-toolbar {
+            .btn-toolbar {
+                padding: @toolbar-btn-padding;
+                padding-bottom: @toolbar-btn-padding-bottom;
+                padding-top: @toolbar-btn-padding-top;
+            }
+
+            .selection-bar .absolute {
+                background: @titlebar-color;
+            }
+        }
+    }
+}
