@@ -20,7 +20,7 @@ end
 
 desc 'Uninstall theme'
 task :uninstall, [:path] do |task, args|
-  rm_r(packages_path.join('greybird'))
+  rm_rf(packages_path.join('greybird'))
 end
 
 task default: [:install]
