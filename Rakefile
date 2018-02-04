@@ -10,8 +10,10 @@ require 'yaml'
 module Mailspring
   class Package
     include Rake::FileUtilsExt
+    attr_reader :src_dir
 
-    def initialize
+    def initialize(src_dir = 'src')
+      @src_dir = Pathname.new(src_dir)
       JSON.parse(manifest.read).each do |k, v|
         self.singleton_class.class_eval do
           attr_accessor k.underscore
@@ -23,28 +25,31 @@ module Mailspring
     end
 
     # @return [Pathname]
-    def install_path
+    def install_dir
       Pathname.new(Dir.home)
         .join('.config') # SHOULD use XDG specification
-        .join('Mailspring', 'packages', name)
+        .join('Mailspring', 'packages')
     end
 
-    def install(origin_dir, target_path = install_path)
-      mkdir_p(target_path)
-      cp_r(origin_dir, target_path)
+    def install(target_dir = install_dir)
+      target_dir = Pathname.new(target_dir)
+      mkdir_p(target_dir)
+      cp_r(src_dir, target_dir.join(name))
 
       self
     end
 
-    def uninstall(target_path = install_path)
-      rm_rf(target_path)
+    def uninstall(target_dir = install_dir)
+      rm_rf(target_dir)
 
       self
     end
+
+    protected
 
     # @return [Pathname]
     def manifest
-      Pathname.new(Dir.pwd).join('src', 'package.json').realpath
+      src_dir.join('package.json').realpath
     end
   end
 end
@@ -66,7 +71,7 @@ package = Mailspring::Package.new
 
 desc "Install #{package.display_name}"
 task :install, [:path] => [:uninstall] do |task, args|
-  package.public_send(*[task.name, 'src', args[:path]].compact)
+  package.public_send(*[task.name, args[:path]].compact)
 end
 
 desc "Uninstall #{package.display_name}"
