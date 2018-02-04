@@ -40,7 +40,8 @@ module Mailspring
     end
 
     def uninstall(target_dir = install_dir)
-      rm_rf(target_dir)
+      target_dir = Pathname.new(target_dir)
+      rm_rf(target_dir.join(name))
 
       self
     end
