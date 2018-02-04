@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'pp'
 require 'open3'
 require 'pathname'
+require 'pp'
 require 'yaml'
 
 def packages_path
@@ -22,5 +22,3 @@ desc 'Uninstall theme'
 task :uninstall, [:path] do |task, args|
   rm_rf(packages_path.join('greybird'))
 end
-
-task default: [:install]
